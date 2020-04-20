@@ -15,4 +15,8 @@ open module org.sterzhen.ypmtool {
     requires spring.core;
     requires java.persistence;
     requires java.annotation;
+    requires spring.security.config;
+    requires spring.security.core;
+    requires spring.security.web;
+    requires org.apache.tomcat.embed.core;
 }
