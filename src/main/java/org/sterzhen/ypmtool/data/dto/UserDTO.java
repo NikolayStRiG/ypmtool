@@ -1,12 +1,14 @@
 package org.sterzhen.ypmtool.data.dto;
 
 import org.sterzhen.ypmtool.data.entities.ToolUser;
+import org.sterzhen.ypmtool.data.entities.ToolUserRole;
 
 public class UserDTO {
 
     private Long id;
     private String login;
     private String password;
+    private Long roleId;
     private UserRoleDTO userRole;
     private String forename;
     private String surname;
@@ -35,7 +37,13 @@ public class UserDTO {
         entity.setId(id);
         entity.setLogin(login);
         entity.setPassword(password);
-        entity.setUserRole(userRole != null ? userRole.toEntity() : null);
+        if (roleId != null) {
+            var role = new ToolUserRole();
+            role.setId(roleId);
+            entity.setUserRole(role);
+        } else {
+            entity.setUserRole(userRole != null ? userRole.toEntity() : null);
+        }
         entity.setForename(forename);
         entity.setSurname(surname);
         entity.setPatronymic(patronymic);
@@ -66,6 +74,14 @@ public class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 
     public UserRoleDTO getUserRole() {

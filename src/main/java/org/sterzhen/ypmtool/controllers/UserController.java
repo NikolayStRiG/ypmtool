@@ -1,5 +1,7 @@
 package org.sterzhen.ypmtool.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.sterzhen.ypmtool.data.dto.UserDTO;
@@ -9,16 +11,14 @@ import javax.persistence.EntityNotFoundException;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+@PreAuthorize("hasAuthority('ADMIN')")
 @CrossOrigin
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
-    private final ToolUserService userService;
-
-    public UserController(ToolUserService userService) {
-        this.userService = userService;
-    }
+    @Autowired
+    private ToolUserService userService;
 
     @GetMapping(path = "")
     public Collection<UserDTO> findAll() {
@@ -34,10 +34,16 @@ public class UserController {
                 .orElseThrow(() -> new EntityNotFoundException("Entity with id = " + id + " not found"));
     }
 
+    @PreAuthorize("isFullyAuthenticated()")
     @GetMapping(path = "/current_user")
     public UserDTO getCurrentUser(Authentication auth) {
         return userService.findByLogin(auth.getName())
                 .map(UserDTO::of)
                 .orElseThrow(() -> new EntityNotFoundException("User with login " + auth.getName() + " not found"));
+    }
+
+    @PostMapping(path = "")
+    public UserDTO createUser(@RequestBody UserDTO dto) {
+        return UserDTO.of(userService.createUser(dto.toEntity()));
     }
 }

@@ -12,4 +12,6 @@ public interface ToolUserService {
     Collection<ToolUser> findAll();
 
     Optional<ToolUser> findById(Long id);
+
+    ToolUser createUser(ToolUser newUser);
 }

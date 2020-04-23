@@ -28,15 +28,16 @@ public class JWTAuthenticationProvider implements AuthenticationProvider {
         Instant expiredDate = jwtTokenService.getExpiredDate(token)
                 .orElseThrow(() -> new AuthenticationServiceException("Invalid token"));
 
+        User user = null;
         if (expiredDate.isAfter(Instant.now())) {
-            User user = (User) userDetailsService.loadUserByUsername(tokenAuthentication.getName());
+            user = (User) userDetailsService.loadUserByUsername(tokenAuthentication.getName());
             tokenAuthentication.setAuthenticated(true);
             tokenAuthentication.setDetails(user);
         } else {
             throw new AuthenticationServiceException("Token expired date error");
         }
 
-        return tokenAuthentication;
+        return new JWTTokenAuthentication(tokenAuthentication.getName(), tokenAuthentication.getCredentials(), user);
     }
 
     @Override

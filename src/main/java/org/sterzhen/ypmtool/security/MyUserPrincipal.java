@@ -23,8 +23,8 @@ public class MyUserPrincipal extends User {
         Collection<GrantedAuthority> grantedAuthorities = new HashSet<>();
         if (user != null) {
             ToolUserRole role = user.getUserRole();
-            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + role.getLevel().name()));
-            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + role.getTag()));
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getLevel().name()));
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getTag()));
         }
         return grantedAuthorities;
     }
