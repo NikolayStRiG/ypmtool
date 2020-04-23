@@ -18,7 +18,7 @@ create table ypmtool.tool_user
     "id"           bigint primary key  not null,
     "login"        varchar(255) unique not null,
     "password"     varchar(255)        not null,
-    "user_role_id" bigint REFERENCES ypmtool.tool_user_role (id),
+    "user_role_id" bigint REFERENCES ypmtool.tool_user_role (id) not null,
     "forename"     varchar(255)        not null,
     "surname"      varchar(255)        not null,
     "patronymic"   varchar(255),
