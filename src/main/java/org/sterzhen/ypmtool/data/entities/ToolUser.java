@@ -96,4 +96,12 @@ public class ToolUser {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String label() {
+        var label = new StringBuilder(surname).append(" ").append(forename.charAt(0)).append(".");
+        if (patronymic != null && !patronymic.isEmpty()) {
+            label.append(" ").append(patronymic.charAt(0)).append(".");
+        }
+        return label.toString();
+    }
 }
