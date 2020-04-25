@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.sterzhen.ypmtool.security.JwtTokenService;
-import org.sterzhen.ypmtool.servises.ToolUserService;
+import org.sterzhen.ypmtool.services.ToolUserService;
 
 @CrossOrigin
 @RestController

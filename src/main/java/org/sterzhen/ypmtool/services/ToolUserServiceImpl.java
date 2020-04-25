@@ -1,4 +1,4 @@
-package org.sterzhen.ypmtool.servises;
+package org.sterzhen.ypmtool.services;
 
 import org.springframework.stereotype.Service;
 import org.sterzhen.ypmtool.data.entities.ToolUser;

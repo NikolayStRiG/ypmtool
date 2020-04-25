@@ -5,7 +5,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.sterzhen.ypmtool.data.dto.UserDTO;
-import org.sterzhen.ypmtool.servises.ToolUserService;
+import org.sterzhen.ypmtool.services.ToolUserService;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Collection;
