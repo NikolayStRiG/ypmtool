@@ -2,6 +2,7 @@ package org.sterzhen.ypmtool.services;
 
 import org.springframework.stereotype.Service;
 import org.sterzhen.ypmtool.data.entities.Task;
+import org.sterzhen.ypmtool.data.entities.TaskStatus;
 import org.sterzhen.ypmtool.data.entities.TaskType;
 import org.sterzhen.ypmtool.data.entities.ToolUser;
 import org.sterzhen.ypmtool.data.repositories.TaskRepository;
@@ -44,6 +45,7 @@ public class TaskServiceImpl implements TaskService {
         var taskType = findTaskType(newTask.getType())
                 .orElseThrow(() -> new EntityNotFoundException("Task type not found"));
 
+        newTask.setStatus(TaskStatus.NEW);
         newTask.setType(taskType);
         newTask.setResponsibleUser(responsibleUser);
         newTask.setCreateTime(ZonedDateTime.now());
